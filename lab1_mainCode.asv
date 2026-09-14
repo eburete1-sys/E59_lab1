@@ -10,6 +10,4 @@
 
 %calculate young's modulus and ultimate stress
 
-%generate stress-strain curve with best fit line
-
-%output calculated values
+%plot 
