@@ -1,15 +1,43 @@
-%create function(s)
-%
+function [strain, stress] = processRawData(deltaX, force, L_0, area)
+    %arguments:
+        %deltaX -> nx1 array of displacement values in {unit}
+        %force  -> nx1 array of force values in N
+        %L_0    -> scalar value of gague length, in {unit}
+        %area   -> cross-sectional area of sample, in {unit^2}
+    
+    %calculate stress & strain data from force & displacement data &
+    %measurements
+    disp('ran processRawData')
+end
+
+%%
+
+function [E, ultStress] = analyzeData(strain, stress, range)
+    %arguments:
+        %strain -> nx1 array of strain values
+        %stress -> nx1 array of stress values in Pa
+        %range  -> 1x2 array, being the xlimits to do linear regression on
+    
+    %plot stress-strain curve
+
+    %find ultimate stress
+    %plot ultimate stress
+
+    if exist('range', 'var') %only if a range for the linear regression has been specified, find and plot the best fit line
+        %find young's modulus
+        %plot best fit line
+        disp('range is defined')
+    end
+    disp('ran analyzeData')
+end
 
 %%
 
 %import force & displacement data, choosing appropriate ranges of entries in the spreadsheet
+%also import cross-sectional areas and gauge lengths
 
-%calculate stress & strain data from force & displacement data &
-%measurements
+%call function for each trial
 
-%calculate young's modulus and ultimate stress
-
-%generate stress-strain curve with best fit line
-
-%output calculated values
+processRawData(1,2,3,4)
+analyzeData(1,2)
+analyzeData(1,2,3)
