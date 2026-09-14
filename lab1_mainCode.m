@@ -1,7 +1,10 @@
-%create function
+%create function(s)
+%
 
 %%
 
-%import data
+%import force & displacement data, choosing appropriate ranges of entries in the spreadsheet
 
-%call function to calculate and output figures and values
+%calculate stress & strain data from 
+
+%calculate young's modulus and ultimate stress
