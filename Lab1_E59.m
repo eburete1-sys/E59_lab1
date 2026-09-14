@@ -4,11 +4,6 @@
 % LAB #1
 
 
-% Antony Coque
-% September 10, 2026
-% ENGR059
-% MATLAB HW1
-
 % clean up MATLAB workspace
 clear % delete all variables in the workspace
 clc % clear all text from the command line
@@ -23,7 +18,7 @@ diameter = 7.31 / 1000; % diameter in meters
 
 area = (pi/4) * diameter.^2; % cross_sectional area in meters
 
-% Steel Specimen
+% Brass Specimen
 
 % Importing data to MATLAB 
 
@@ -31,9 +26,9 @@ data = readmatrix('lab1Data.csv');
 
 % Separating columns into variables: time, force, and displacement
 
-time = data(2:end, 13);
-force = data(2:end, 15); % force data values 
-displacement = data(2:end, 14); % displacement values 
+time = data(2:end, 1);
+force = data(2:end, 3); % force data values 
+displacement = data(2:end, 2); % displacement values 
 
 % Calculating engineering stress and strain
 
