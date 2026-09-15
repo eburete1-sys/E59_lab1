@@ -36,6 +36,8 @@ end
 %import force & displacement data, choosing appropriate ranges of entries in the spreadsheet
 %also import cross-sectional areas and gauge lengths
 
+%We want to import data from NEW_lab1Data.csv
+
 %call function for each trial
 
 processRawData(1,2,3,4)
