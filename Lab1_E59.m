@@ -22,7 +22,7 @@ area = (pi/4) * diameter.^2; % cross_sectional area in meters
 
 % Importing data to MATLAB 
 
-data = readmatrix('lab1Data.csv');
+data = readmatrix('NEW_lab1Data.csv');
 
 % Separating columns into variables: time, force, and displacement
 

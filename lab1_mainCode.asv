@@ -8,7 +8,7 @@ function [strain, stress] = processRawData(deltaX, force, L_0, area)
     %calculate stress & strain data from force & displacement data &
     %measurements
     stress = force / area; % stress is given in Pascal (Pa)
-    strain = deltaX / L_0; % strain is unitless
+    strain = displacement / gauge_length; % strain is unitless
     disp('ran processRawData')
 end
 
@@ -37,7 +37,7 @@ end
 % Brass
 
 %import force & displacement data, choosing appropriate ranges of entries in the spreadsheet
-data = readmatrix("NEW_lab1Data.csv");
+data = readmatrix("NEW_la1Data.csv");
 force = data(2:end, 3); % force data values 
 displacement = data(2:end, 2); % displacement values  
 
@@ -51,16 +51,5 @@ len_g = 32.5 / 1000 % gauge length in meters
 %call function for each trial
 
 [stress, strain] = processRawData(displacement, force, len_g, area)
-
-figure(1)
-p = plot(strain, stress/1e9, 'LineWidth', 2, 'Color', 'black'); % strain and stress in x,y axis 
-% stress is turned to GPa so it fits the graph better
-xlabel('Engineering Strain (m/m)', 'FontWeight', 'bold', 'FontSize', 12); % label of x axis with units
-ylabel('Engineering Stress (GPa)', 'FontWeight', 'bold', 'FontSize', 12); % label of y axis with units
-title('Stress-Strain Curve for Brass', 'FontSize', 15); 
-grid on;
-
-hold on;
-
 analyzeData(1,2)
 analyzeData(1,2,3)
