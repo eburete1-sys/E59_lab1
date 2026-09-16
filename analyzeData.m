@@ -12,19 +12,19 @@ function [E, ultStress] = analyzeData(strain, stress, ind)
     theme('light')
     xlabel('Engineering Strain (m/m)', 'FontWeight', 'bold', 'FontSize', 12); % label of x axis with units
     ylabel('Engineering Stress (UNITS)', 'FontWeight', 'bold', 'FontSize', 12); % label of y axis with units
-    title('Stress-Strain Curve for Brass', 'FontSize', 15); 
+    
     
 
     %plot stress-strain curve
     axis auto
-    plot(strain, stress,'-k','linewidth',1)
+    plot(strain, stress,'-k','linewidth', 2)
     axis manual
 
     %find ultimate stress
-    ultStress = max(stress);
-    ultInd = find(stress==ultStress,1); %index of ultimate stress
-    %plot ultimate stress
-    plot(strain(ultInd), ultStress, 'rx', 'markersize', 12)
+        ultStress = max(stress);
+        ultInd = find(stress==ultStress,1); %index of ultimate stress
+        %plot ultimate stress
+        plot(strain(ultInd), ultStress, 'rx', 'markersize', 12)
 
     if exist('ind', 'var') %only if a range for the linear regression has been specified in the arguments, find and plot the best fit line
         %find best fit
@@ -33,6 +33,8 @@ function [E, ultStress] = analyzeData(strain, stress, ind)
         %plot best fit line
         plot(strain, polyval(fit,strain), '-b', 'linewidth', 1)
     end
+
+    legend('Stress-Strain curve', 'Ultimate stress', 'Best fit line', 'location', 'south')
 end
 
 %test command to demonstrate functions:
