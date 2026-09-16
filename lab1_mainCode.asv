@@ -19,15 +19,12 @@ function [E, ultStress] = analyzeData(strain, stress, ind)
         %ind    -> 1x2 array of indices. Specifies the range of entries to do the
         %linear regression on
     
-    %set up new figure
+    %plot stress-strain curve
     figure
     grid on
     hold on
     theme('light')
-    
-
-    %plot stress-strain curve
-    plot(strain, stress,'-k','linewidth',1)
+    plot(strain, stress,'-b','linewidth',1)
 
     %find ultimate stress
     ultStress = max(stress);
@@ -37,11 +34,12 @@ function [E, ultStress] = analyzeData(strain, stress, ind)
 
     if exist('ind', 'var') %only if a range for the linear regression has been specified in the arguments, find and plot the best fit line
         %find best fit
-        fit = polyfit(strain(ind(1):ind(2)), stress(ind(1):ind(2)), 1); %find best fit line with regression
-        E = fit(1); %young's modulus in Pa
+        fitLine = polyfit(strain(ind(1):ind(2)), stress(ind(1):ind(2)), 1); %find best fit line with regression
+        E = fitLine(1); %young's modulus in Pa
         %plot best fit line
-        plot(strain, polyval(fit), '-b', 'linewidth', 1)
+        disp('range is defined')
     end
+    disp('ran analyzeData')
 end
 
 %%
