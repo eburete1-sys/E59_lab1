@@ -6,7 +6,8 @@ function [strain, stress] = processRawData(deltaX, force, L_0, area)
         %area   -> cross-sectional area of sample, in m^2
     %calculate stress & strain data from force & displacement data &
     %measurements
-    force = abs(force)
+    force = abs(force);
+    deltaX = abs(deltaX);
     strain = deltaX/L_0; %strain values (unitless)
     stress = force/area; %stress values in Pa
     strain(isnan(strain)) = [];

@@ -4,7 +4,6 @@
 data = readmatrix("NEW_lab1Data.csv");
 force = data(22:end, 3); % force data values 
 displacement = data(22:end, 2); % displacement values  
-
 %also import cross-sectional areas and gauge lengths
 area = 8.553 / 1000 % cross-sectional area in meters
 len_g = 32.5 / 1000 % gauge length in meters
@@ -18,7 +17,7 @@ len_g = 32.5 / 1000 % gauge length in meters
 %call functions for each trial
 
 
-[stress, strain] = processRawData(displacement, force, len_g, area)
+[strain, stress] = processRawData(displacement, force, len_g, area)
 
 figure(1)
 p = plot(strain, stress/1e9, 'LineWidth', 2, 'Color', 'black'); % strain and stress in x,y axis 
