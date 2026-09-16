@@ -2,8 +2,8 @@
 
 %import force & displacement data, choosing appropriate ranges of entries in the spreadsheet
 data = readmatrix("NEW_lab1Data.csv");
-force = data(2:end, 3); % force data values 
-displacement = data(2:end, 2); % displacement values  
+force = data(22:end, 3); % force data values 
+displacement = data(22:end, 2); % displacement values  
 
 %also import cross-sectional areas and gauge lengths
 area = 8.553 / 1000 % cross-sectional area in meters
