@@ -10,10 +10,15 @@ function [E, ultStress] = analyzeData(strain, stress, ind)
     grid on
     hold on
     theme('light')
+    xlabel('Engineering Strain (m/m)', 'FontWeight', 'bold', 'FontSize', 12); % label of x axis with units
+    ylabel('Engineering Stress (UNITS)', 'FontWeight', 'bold', 'FontSize', 12); % label of y axis with units
+    title('Stress-Strain Curve for Brass', 'FontSize', 15); 
     
 
     %plot stress-strain curve
+    axis auto
     plot(strain, stress,'-k','linewidth',1)
+    axis manual
 
     %find ultimate stress
     ultStress = max(stress);
@@ -26,6 +31,9 @@ function [E, ultStress] = analyzeData(strain, stress, ind)
         fit = polyfit(strain(ind(1):ind(2)), stress(ind(1):ind(2)), 1); %find best fit line with regression
         E = fit(1); %young's modulus in Pa
         %plot best fit line
-        plot(strain, polyval(fit), '-b', 'linewidth', 1)
+        plot(strain, polyval(fit,strain), '-b', 'linewidth', 1)
     end
 end
+
+%test command to demonstrate functions:
+%analyzeData([1,2,3,4,5,6,7,8,9],[2,3,6,9,10,12,14,15,13],[1,6])
