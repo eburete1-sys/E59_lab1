@@ -17,7 +17,15 @@ len_g = 32.5 / 1000 % gauge length in meters
 % Call function to find stress and strain
 [strain, stress] = processRawData(displacement, force, len_g, area)
 
-[E, ultStress] = analyzeData(strain,stress,1:30)
+[E, ultStress] = analyzeData(strain,stress,)
+% Plot stress-strain curve
+% figure(1)
+% plot(strain, stress/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
+% xlabel('Engineering Strain (m/m)', 'FontSize', 12); % label of x axis with units
+% ylabel('Engineering Stress (GPa)', 'FontSize', 12); % label of y axis with units
+% title('Stress-Strain Curve for Brass', 'Fontweight', 'bold', 'FontSize', 15); 
+% grid on;
+% hold on;
 
 % /// Polyethylene tensile sample (ME 8235)
 figure(2)
@@ -80,7 +88,6 @@ ylabel('Engineering Stress (GPa)', 'FontSize', 12); % label of y axis with units
 title('Polyethylene 3', 'Fontweight', 'bold', 'FontSize', 15); 
 grid on;
 hold on;
-
 
 
 

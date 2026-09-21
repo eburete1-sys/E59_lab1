@@ -11,13 +11,12 @@ function [E, ultStress] = analyzeData(strain, stress, ind)
     hold on
     theme('light')
     xlabel('Engineering Strain (m/m)', 'FontWeight', 'bold', 'FontSize', 12); % label of x axis with units
-    ylabel('Engineering Stress (UNITS)', 'FontWeight', 'bold', 'FontSize', 12); % label of y axis with units
-    
+    ylabel('Engineering Stress (GPa)', 'FontWeight', 'bold', 'FontSize', 12); % label of y axis with units
     
 
     %plot stress-strain curve
     axis auto
-    plot(strain, stress,'-k','linewidth', 2)
+    plot(strain, stress,'-k','linewidth', 2) % stress is turned to GPa 
     axis manual
 
     %find ultimate stress
