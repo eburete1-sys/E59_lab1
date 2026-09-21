@@ -17,15 +17,7 @@ len_g = 32.5 / 1000 % gauge length in meters
 % Call function to find stress and strain
 [strain, stress] = processRawData(displacement, force, len_g, area)
 
-[E, ultStress] = analyzeData(strain,stress,)
-% Plot stress-strain curve
-% figure(1)
-% plot(strain, stress/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
-% xlabel('Engineering Strain (m/m)', 'FontSize', 12); % label of x axis with units
-% ylabel('Engineering Stress (GPa)', 'FontSize', 12); % label of y axis with units
-% title('Stress-Strain Curve for Brass', 'Fontweight', 'bold', 'FontSize', 15); 
-% grid on;
-% hold on;
+[E, ultStress] = analyzeData(strain,stress,1:30)
 
 % /// Polyethylene tensile sample (ME 8235)
 figure(2)
@@ -90,6 +82,85 @@ grid on;
 hold on;
 
 
+% /// Thin I-beams (ME 7012)
+figure(3)
 
-analyzeData(1,2)
-analyzeData([1,2,3,4,5,6,7,8,9],[2,4,6,8,10,12,14,14,14],[1 6])
+% Long 1
+% Choose appropriate ranges of entries in the spreadsheet for values
+
+force_l = data(2:end, 23); % force data values 
+displacement_l = data(2:end, 22); % displacement values  
+
+% Import cross-sectional areas and gauge lengths 
+
+area_l = 26.676 / 1000 % cross-sectional area in meters
+len_gl = 140 / 1000 % gauge length in meters
+
+% Call function to find stress and strain
+[strain_l, stress_l] = processRawData(displacement_l, force_l, len_gl, area_l)
+
+% Plot stress-strain curve
+subplot(2,2,1)
+plot(strain_l, stress_l/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
+xlabel('Engineering Strain (m/m)', 'FontSize', 12); % label of x axis with units
+ylabel('Engineering Stress (GPa)', 'FontSize', 12); % label of y axis with units
+title('Long I-beam', 'Fontweight', 'bold', 'FontSize', 15); 
+grid on;
+hold on;
+
+% Long 2
+% Choose appropriate ranges of entries in the spreadsheet for values
+
+force_l2 = data(2:end, 27); % force data values 
+displacement_l2 = data(2:end, 26); % displacement values  
+
+% Call function to find stress and strain
+[strain_l2, stress_l2] = processRawData(displacement_l2, force_l2, len_gl, area_l)
+
+% Plot stress-strain curve
+subplot(2,2,2)
+plot(strain_l2, stress_l2/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
+xlabel('Engineering Strain (m/m)', 'FontSize', 12); % label of x axis with units
+ylabel('Engineering Stress (GPa)', 'FontSize', 12); % label of y axis with units
+title('Long I-beam 2', 'Fontweight', 'bold', 'FontSize', 15); 
+grid on;
+hold on;
+
+% Short 1
+% Choose appropriate ranges of entries in the spreadsheet for values
+
+force_s = data(2:end, 31); % force data values 
+displacement_s = data(2:end, 30); % displacement values  
+
+% Call function to find stress and strain
+[strain_s, stress_s] = processRawData(displacement_s, force_s, len_gl, area_l)
+
+% Plot stress-strain curve
+subplot(2,2,3)
+plot(strain_s, stress_s/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
+xlabel('Engineering Strain (m/m)', 'FontSize', 12); % label of x axis with units
+ylabel('Engineering Stress (GPa)', 'FontSize', 12); % label of y axis with units
+title('Short I-beam 1', 'Fontweight', 'bold', 'FontSize', 15); 
+grid on;
+hold on;
+
+% Short 2
+% Choose appropriate ranges of entries in the spreadsheet for values
+
+force_s2 = data(2:end, 35); % force data values 
+displacement_s2 = data(2:end, 34); % displacement values  
+
+% Call function to find stress and strain
+[strain_s2, stress_s2] = processRawData(displacement_s2, force_s2, len_gl, area_l)
+
+% Plot stress-strain curve
+subplot(2,2,4)
+plot(strain_s2, stress_s2/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
+xlabel('Engineering Strain (m/m)', 'FontSize', 12); % label of x axis with units
+ylabel('Engineering Stress (GPa)', 'FontSize', 12); % label of y axis with units
+title('Short I-beam 2', 'Fontweight', 'bold', 'FontSize', 15); 
+grid on;
+hold on;
+
+
+
