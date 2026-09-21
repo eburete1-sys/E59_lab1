@@ -1,6 +1,97 @@
-% Import necessary data
+% Import cross-sectional areas and gauge lengths 
+close all
+clear
+clc
 
 data = readmatrix("NEW_lab1Data.csv");
+
+%import cross-sectional area and original gauge length of samples
+area_brass = (1e-6)*8.553; %meters^2
+L_0_brass = (1e-3)*32.5; %meters
+
+area_coupon = (1e-6)*1.835; %meters^2
+L_0_coupon = 0.0018; %meters
+
+area_ibeam = (1e-6)*26.676; %meters^2
+L_0_ibeam_long = 0.017; %meters
+L_0_ibeam_short = 0.0115; %meters
+
+area_poly = (1e-6)*8.867; %meters^2
+L_0_poly = (1e-3)*33.2; %meters
+
+
+% Brass
+deltaX_brass = -1*data(20:98,2);
+force_brass = -1*data(20:98,3);
+[strain_brass, stress_brass] = processRawData(deltaX_brass, force_brass, L_0_brass, area_brass);
+analyzeData(strain_brass, stress_brass)
+
+%orange coupon
+deltaX_orange = -1*data(1:147,6);
+force_orange = -1*data(1:147,7);
+[strain_orange, stress_orange] = processRawData(deltaX_orange, force_orange, L_0_coupon, area_coupon);
+%[E_orange, ultStress_orange] =
+analyzeData(strain_orange, stress_orange);
+
+%black coupon
+deltaX_black = -1*data(1:39,10);
+force_black = -1*data(1:39,11);
+[strain_black, stress_black] = processRawData(deltaX_black, force_black, L_0_coupon, area_coupon);
+analyzeData(strain_black, stress_black);
+
+%blue coupon
+deltaX_blue = -1*data(2:157,14);
+force_blue = -1*data(2:157,15);
+[strain_blue, stress_blue] = processRawData(deltaX_blue, force_blue, L_0_coupon, area_coupon);
+analyzeData(strain_blue, stress_blue)
+
+%clear coupon
+deltaX_clear = -1*data(2:234,18);
+force_clear = -1*data(2:234,19);
+[strain_clear, stress_clear] = processRawData(deltaX_clear, force_clear, L_0_coupon, area_coupon);
+analyzeData(strain_clear, stress_clear)
+
+%long ibeam 1
+deltaX_long1 = -1*data(2:64,22);
+force_long1 = -1*data(2:64,23);
+[strain_long1, stress_long1] = processRawData(deltaX_long1, force_long1, L_0_ibeam_long, area_ibeam);
+analyzeData(strain_long1, stress_long1)
+
+%long ibeam 2
+deltaX_long2 = -1*data(2:55,26);
+force_long2 = -1*data(2:55,27);
+[strain_long2, stress_long2] = processRawData(deltaX_long2, force_long2, L_0_ibeam_long, area_ibeam);
+analyzeData(strain_long2, stress_long2)
+
+%short ibeam 1
+deltaX_short1 = -1*data(2:34,30);
+force_short1 = -1*data(2:34,31);
+[strain_short1, stress_short1] = processRawData(deltaX_short1, force_short1, L_0_ibeam_short, area_ibeam);
+analyzeData(strain_short1, stress_short1)
+
+%short ibeam 2
+deltaX_short2 = -1*data(2:26,34);
+force_short2 = -1*data(2:26,35);
+[strain_short2, stress_short2] = processRawData(deltaX_short2, force_short2, L_0_ibeam_short, area_ibeam);
+analyzeData(strain_short2, stress_short2)
+
+%polyethylene 1
+deltaX_poly1 = -1*data(2:587,38);
+force_poly1 = -1*data(2:587,39);
+[strain_poly1, stress_poly1] = processRawData(deltaX_poly1, force_poly1, L_0_poly, area_poly);
+analyzeData(strain_poly1, stress_poly1)
+
+%polyethylene 2
+deltaX_poly2 = -1*data(2:720,42);
+force_poly2 = -1*data(2:720,43);
+[strain_poly2, stress_poly2] = processRawData(deltaX_poly2, force_poly2, L_0_poly, area_poly);
+analyzeData(strain_poly2, stress_poly2)
+
+%polyethylene 3
+deltaX_poly3 = -1*data(2:720,46);
+force_poly3 = -1*data(2:720,47);
+[strain_poly3, stress_poly3] = processRawData(deltaX_poly3, force_poly3, L_0_poly, area_poly);
+analyzeData(strain_poly3, stress_poly3)
 
 % ///Brass (ME 8232)
 
@@ -8,34 +99,21 @@ data = readmatrix("NEW_lab1Data.csv");
 
 force = data(22:end, 3); % force data values 
 displacement = data(22:end, 2); % displacement values  
-
-% Import cross-sectional areas and gauge lengths 
-
 area = 8.553 / 1000; % cross-sectional area in meters
 len_g = 32.5 / 1000; % gauge length in meters
-
-% Call function to find stress and strain
 [strain, stress] = processRawData(displacement, force, len_g, area);
-
 [E, ultStress] = analyzeData(strain,stress,1:30);
+
 
 % /// Polyethylene tensile sample (ME 8235)
 figure(2)
-
-% Trial 1
-% Choose appropriate ranges of entries in the spreadsheet for values
-
-force_p = data(2:end, 39); % force data values 
-displacement_p = data(2:end, 38); % displacement values  
-
-% Import cross-sectional areas and gauge lengths 
-
 area_p = 8.867 / 1000; % cross-sectional area in meters
 len_gp = 33.2 / 1000; % gauge length in meters
 
-% Call function to find stress and strain
+% Trial 1
+force_p = data(2:end, 39); % force data values 
+displacement_p = data(2:end, 38); % displacement values  
 [strain_p, stress_p] = processRawData(displacement_p, force_p, len_gp, area_p);
-
 % Plot stress-strain curve
 subplot(2,2,1)
 plot(strain_p, stress_p/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
@@ -45,15 +123,11 @@ title('Polyethylene', 'Fontweight', 'bold', 'FontSize', 15);
 grid on;
 hold on;
 
-% Trial 2
-% Choose appropriate ranges of entries in the spreadsheet for values
 
+% Trial 2
 force_p2 = data(2:end, 43); % force data values 
 displacement_p2 = data(2:end, 42); % displacement values  
-
-% Call function to find stress and strain
 [strain_p2, stress_p2] = processRawData(displacement_p2, force_p2, len_gp, area_p);
-
 % Plot stress-strain curve
 subplot(2,2,2)
 plot(strain_p2, stress_p2/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
@@ -64,14 +138,9 @@ grid on;
 hold on;
 
 % Trial 3
-% Choose appropriate ranges of entries in the spreadsheet for values
-
 force_p3 = data(2:end, 47); % force data values 
 displacement_p3 = data(2:end, 46); % displacement values  
-
-% Call function to find stress and strain
 [strain_p3, stress_p3] = processRawData(displacement_p3, force_p3, len_gp, area_p);
-
 % Plot stress-strain curve
 subplot(2,2,3)
 plot(strain_p3, stress_p3/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
@@ -81,24 +150,14 @@ title('Polyethylene 3', 'Fontweight', 'bold', 'FontSize', 15);
 grid on;
 hold on;
 
-
-% /// Thin I-beams (ME 7012)
+% Thin I-beams (ME 7012)
 figure(3)
-
 % Long 1
-% Choose appropriate ranges of entries in the spreadsheet for values
-
 force_l = data(2:end, 23); % force data values 
 displacement_l = data(2:end, 22); % displacement values  
-
-% Import cross-sectional areas and gauge lengths 
-
 area_l = 26.676 / 1000; % cross-sectional area in meters
-len_gl = 140 / 1000; % gauge length in meters
-
-% Call function to find stress and strain
+len_gl = 0.017; % gauge length in meters
 [strain_l, stress_l] = processRawData(displacement_l, force_l, len_gl, area_l);
-
 % Plot stress-strain curve
 subplot(2,2,1)
 plot(strain_l, stress_l/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
@@ -109,14 +168,9 @@ grid on;
 hold on;
 
 % Long 2
-% Choose appropriate ranges of entries in the spreadsheet for values
-
 force_l2 = data(2:end, 27); % force data values 
 displacement_l2 = data(2:end, 26); % displacement values  
-
-% Call function to find stress and strain
 [strain_l2, stress_l2] = processRawData(displacement_l2, force_l2, len_gl, area_l);
-
 % Plot stress-strain curve
 subplot(2,2,2)
 plot(strain_l2, stress_l2/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
@@ -127,14 +181,10 @@ grid on;
 hold on;
 
 % Short 1
-% Choose appropriate ranges of entries in the spreadsheet for values
-len_gs = 80 / 1000;
+len_gs = 0.0115;
 force_s = data(2:end, 31); % force data values 
 displacement_s = data(2:end, 30); % displacement values  
-
-% Call function to find stress and strain
 [strain_s, stress_s] = processRawData(displacement_s, force_s, len_gs, area_l);
-
 % Plot stress-strain curve
 subplot(2,2,3)
 plot(strain_s, stress_s/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
@@ -145,14 +195,9 @@ grid on;
 hold on;
 
 % Short 2
-% Choose appropriate ranges of entries in the spreadsheet for values
-
 force_s2 = data(2:end, 35); % force data values 
 displacement_s2 = data(2:end, 34); % displacement values  
-
-% Call function to find stress and strain
 [strain_s2, stress_s2] = processRawData(displacement_s2, force_s2, len_gs, area_l);
-
 % Plot stress-strain curve
 subplot(2,2,4)
 plot(strain_s2, stress_s2/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
@@ -162,25 +207,14 @@ title('Short I-beam 2', 'Fontweight', 'bold', 'FontSize', 15);
 grid on;
 hold on;
 
-
 % /// Plastic coupon (AP 8222)
-
 figure(4)
-
 % Orange
-% Choose appropriate ranges of entries in the spreadsheet for values
-
 force_o = data(2:end, 7); % force data values 
 displacement_o = data(2:end, 6); % displacement values  
-
-% Import cross-sectional areas and gauge lengths 
-
 area_o = 2.64461 / 1000; % cross-sectional area in meters
-len_go = 40 / 1000; % gauge length in meters
-
-% Call function to find stress and strain
+len_go = 0.0018; % gauge length in meters
 [strain_o, stress_o] = processRawData(displacement_l, force_l, len_go, area_o);
-
 % Plot stress-strain curve
 subplot(2,2,1)
 plot(strain_o, stress_o/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
@@ -191,14 +225,9 @@ grid on;
 hold on;
 
 % Black
-% Choose appropriate ranges of entries in the spreadsheet for values
-
 force_b = data(2:end, 11); % force data values 
 displacement_b = data(2:end, 10); % displacement values  
-
-% Call function to find stress and strain
 [strain_b, stress_b] = processRawData(displacement_b, force_b, len_go, area_o);
-
 % Plot stress-strain curve
 subplot(2,2,2)
 plot(strain_b, stress_b/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
@@ -209,14 +238,9 @@ grid on;
 hold on;
 
 % Blue
-% Choose appropriate ranges of entries in the spreadsheet for values
-
 force_u = data(2:end, 15); % force data values 
 displacement_u = data(2:end, 14); % displacement values  
-
-% Call function to find stress and strain
 [strain_u, stress_u] = processRawData(displacement_u, force_u, len_go, area_o);
-
 % Plot stress-strain curve
 subplot(2,2,3)
 plot(strain_u, stress_u/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
@@ -227,14 +251,9 @@ grid on;
 hold on;
 
 % Clear
-% Choose appropriate ranges of entries in the spreadsheet for values
-
 force_c = data(2:end, 19); % force data values 
 displacement_c = data(2:end, 18); % displacement values  
-
-% Call function to find stress and strain
 [strain_c, stress_c] = processRawData(displacement_c, force_c, len_go, area_o);
-
 % Plot stress-strain curve
 subplot(2,2,4)
 plot(strain_c, stress_c/1e9, 'LineWidth', 2, 'Color', 'black'); % stress is turned to GPa so it fits the graph better
