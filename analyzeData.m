@@ -6,7 +6,6 @@ function [E, ultStress] = analyzeData(strain, stress, ind)
         %linear regression on
     
     %set up new figure
-    figure
     grid on
     hold on
     theme('light')
@@ -14,7 +13,6 @@ function [E, ultStress] = analyzeData(strain, stress, ind)
 
     ylabel('Engineering Stress (GPa)', 'FontWeight', 'bold', 'FontSize', 12); % label of y axis with units
     
-
     ylabel('Engineering Stress (MPa)', 'FontWeight', 'bold', 'FontSize', 12); % label of y axis with units
 
 
