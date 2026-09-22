@@ -129,6 +129,30 @@ force_poly3 = -1*data(2:720,47);
 
 analyzeData(strain_poly3, stress_poly3)
 
+% Calibration Data and Graph
+
+data2 = readmatrix("Calibration (1).csv");
+
+%import cross-sectional area and original gauge length of samples
+position = -1*data2(2:end,2);
+force_N = -1*data2(2:end,3);
+degree = 2;
+
+polynomial = polyfit(position, force_N, degree);
+
+x_fit = linspace(min(position), max(position), 200);
+y_fit = polyval(polynomial, x_fit);
+
+figure;
+plot(position, force_N, 'bo', 'MarkerSize', 4);
+hold on;
+plot(x_fit, y_fit, 'r-', 'LineWidth', 2);
+xlabel('Position (m)');
+ylabel('Force (N)');
+title('Force vs. Position Polynomial Curve Fit')
+legend('Measured data', 'Polynomial fit', 'Location', 'best');
+grid on;
+
 % ///Brass (ME 8232)
 
 % Choose appropriate ranges of entries in the spreadsheet for values
