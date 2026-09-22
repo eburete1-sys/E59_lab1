@@ -34,8 +34,6 @@ function [E, ultStress] = analyzeData(strain, stress, ind)
         ultInd = find(stress==ultStress,1); %index of ultimate stress
         %plot ultimate stress
         plot(strain(ultInd), ultStress, 'rx', 'markersize', 12, 'linewidth', 2)
-
-    legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'south')
 end
 
 %test command to demonstrate functions:

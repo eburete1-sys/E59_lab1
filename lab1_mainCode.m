@@ -29,6 +29,7 @@ force_brass = -1*data(20:98,3);
 E_brass
 ultStress_brass
 title('Stress vs. Strain (Brass specimen)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'south')
 
 figure
 %orange coupon
@@ -40,6 +41,7 @@ force_orange = -1*data(1:147,7);
 E_orange
 ultStress_orange
 title('Stress vs. Strain (Orange Plastic Coupon)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'north')
 
 %black coupon
 subplot(2,2,2)
@@ -50,6 +52,7 @@ force_black = -1*data(1:39,11);
 E_black
 ultStress_black
 title('Stress vs. Strain (Black Plastic Coupon)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'southwest')
 
 %blue coupon
 subplot(2,2,3)
@@ -60,6 +63,7 @@ force_blue = -1*data(2:157,15);
 E_blue
 ultStress_blue
 title('Stress vs. Strain (Blue Plastic Coupon)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'south')
 
 %clear coupon
 subplot(2,2,4)
@@ -70,6 +74,7 @@ force_clear = -1*data(2:234,19);
 E_clear
 ultStress_clear
 title('Stress vs. Strain (Clear Plastic Coupon)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'northwest')
 fontsize(scale=0.7)
 
 
@@ -83,6 +88,7 @@ force_long1 = -1*data(2:64,23);
 E_long1
 ultStress_long1
 title('Stress vs. Strain (Long Ibeam 1)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'south', 'fontsize', 5)
 
 %long ibeam 2
 subplot(2,2,2)
@@ -93,6 +99,8 @@ force_long2 = -1*data(2:55,27);
 E_long2
 ultStress_long2
 title('Stress vs. Strain (Long Ibeam 2)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'south')
+
 
 %short ibeam 1
 subplot(2,2,3)
@@ -103,6 +111,7 @@ force_short1 = -1*data(2:34,31);
 E_short1
 ultStress_short1
 title('Stress vs. Strain (Short Ibeam 1)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'south')
 
 %short ibeam 2
 subplot(2,2,4)
@@ -113,6 +122,7 @@ force_short2 = -1*data(2:26,35);
 E_short2
 ultStress_short2
 title('Stress vs. Strain (Short Ibeam 2)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'south')
 
 fontsize(scale = 0.7)
 
@@ -126,19 +136,18 @@ force_poly1 = -1*data(2:587,39);
 E_poly1
 ultStress_poly1
 title('Stress vs. Strain (Polyethylene specimen 1)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'north')
 
 %polyethylene 2
 subplot(2,2,2)
 deltaX_poly2 = -1*data(2:720,42);
 force_poly2 = -1*data(2:720,43);
 [strain_poly2, stress_poly2] = processRawData(deltaX_poly2, force_poly2, L_0_poly, area_poly);
-
-analyzeData(strain_poly2, stress_poly2)
-
 [E_poly2, ultStress_poly2] = analyzeData(strain_poly2, stress_poly2, [18, 22]);
 E_poly2
 ultStress_poly2
 title('Stress vs. Strain (Polyethylene specimen 2)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'south')
 
 %polyethylene 3
 subplot(2,2,3)
@@ -148,6 +157,8 @@ force_poly3 = -1*data(2:720,47);
 [E_poly3, ultStress_poly3] = analyzeData(strain_poly3, stress_poly3, [1, 5]);
 E_poly3
 ultStress_poly3
+title('Stress vs. Strain (Polyethylene specimen 3)')
+legend('Stress-Strain curve', 'Best fit line', 'Ultimate stress', 'location', 'north')
 fontsize(scale = 0.7)
 
 % Calibration Data and Graph
