@@ -9,8 +9,5 @@ function [strain, stress] = processRawData(deltaX, force, L_0, area)
     force = abs(force);
     deltaX = abs(deltaX);
     strain = deltaX/L_0; %strain values (unitless)
-    stress = force/area; %stress values in Pa
-    strain(isnan(strain)) = [];
-    stress(isnan(stress)) = [];
-
+    stress = (force/area)*(1e-6); %stress values in MPa
 end
